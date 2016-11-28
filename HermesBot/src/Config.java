@@ -1,28 +1,26 @@
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
 
-public class Config {
+class Config {
 
     private String ip;
-    private String port;
+    private int port;
     private String nickname;
 
-    Properties prop = new Properties();
-    InputStream input = null;
+    private Properties prop = new Properties();
 
 
-    public void readConfig(){
+    void readConfig(){
         try {
-            input = new FileInputStream("src/config.properties");
+            InputStream input = new FileInputStream("src/config.properties");
 
             prop.load(input);
 
             ip = prop.getProperty("ip");
 
-            port = prop.getProperty("port");
+            port = Integer.parseInt(prop.getProperty("port"));
 
             nickname = prop.getProperty("nickname");
         } catch (IOException e) {
@@ -35,14 +33,20 @@ public class Config {
 
     }
 
-    public String getString(String index){
+    String getString(String index){
         switch (index){
             case "ip" :
                 return ip;
-            case "port" :
-                return port;
             case "nickname" :
                 return nickname;
+        }
+        return null;
+    }
+
+    Integer getInteger(String index){
+        switch (index){
+            case "port" :
+                return port;
         }
         return null;
     }
