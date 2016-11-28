@@ -1,2 +1,2 @@
 # Hermes
-TS3-Hermes.com Bots/Scripts asd
+TS3-Hermes.com Java Bot using Sockets.
