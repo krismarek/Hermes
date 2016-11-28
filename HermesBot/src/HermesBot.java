@@ -17,7 +17,7 @@ class HermesBot extends Thread{
             socket.connect(new InetSocketAddress(cfg.getString("ip"), cfg.getInteger("port")));
 
             putCommand("use 1");
-            putCommand("login client_login_name=sqa client_login_password=m8t4SUcS");
+            putCommand("login client_login_name="+ cfg.getString("login")+" client_login_password="+cfg.getString("password"));
             putCommand("servernotifyregister event=server");
             putCommand("servernotifyregister event=channel id=0");
             putCommand("servernotifyregister event=textserver");

@@ -8,6 +8,8 @@ class Config {
     private String ip;
     private int port;
     private String nickname;
+    private String login;
+    private String password;
 
     private Properties prop = new Properties();
 
@@ -23,6 +25,10 @@ class Config {
             port = Integer.parseInt(prop.getProperty("port"));
 
             nickname = prop.getProperty("nickname");
+
+            login = prop.getProperty("login");
+
+            password = prop.getProperty("password");
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -39,6 +45,10 @@ class Config {
                 return ip;
             case "nickname" :
                 return nickname;
+            case "password" :
+                return password;
+            case "login" :
+                return login;
         }
         return null;
     }
