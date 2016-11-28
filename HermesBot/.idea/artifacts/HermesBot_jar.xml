@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="HermesBot:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/HermesBot_jar</output-path>
+    <root id="archive" name="HermesBot.jar">
+      <element id="module-output" name="HermesBot" />
+    </root>
+  </artifact>
+</component>
