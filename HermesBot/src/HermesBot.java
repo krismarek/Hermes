@@ -7,8 +7,9 @@ import java.util.concurrent.LinkedBlockingQueue;
 class HermesBot extends Thread{
     private static final BlockingQueue<String> sendQueue = new LinkedBlockingQueue<>();
     private static Socket socket;
+    private static Config cfg;
     public static void main(String[] args) {
-        Config cfg = new Config();
+        cfg = new Config();
         cfg.readConfig();
 
         socket = new Socket();
@@ -18,6 +19,7 @@ class HermesBot extends Thread{
 
             putCommand("use 1");
             putCommand("login client_login_name="+ cfg.getString("login")+" client_login_password="+cfg.getString("password"));
+            putCommand("clientupdate client_nickname="+cfg.getString("nickname"));
             putCommand("servernotifyregister event=server");
             putCommand("servernotifyregister event=channel id=0");
             putCommand("servernotifyregister event=textserver");
@@ -31,11 +33,11 @@ class HermesBot extends Thread{
             e.printStackTrace();
         }
     }
-    public static Socket getSocket(){
+    static Socket getSocket(){
         return socket;
     }
 
-    public static void putCommand(String msg){
+    static void putCommand(String msg){
         try {
             sendQueue.put(msg);
         } catch (InterruptedException e) {
@@ -43,7 +45,11 @@ class HermesBot extends Thread{
         }
     }
 
-    public static BlockingQueue getQueue(){
+    static BlockingQueue getQueue(){
         return sendQueue;
+    }
+
+    static Config getCfg(){
+        return cfg;
     }
 }

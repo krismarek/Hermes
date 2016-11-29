@@ -8,9 +8,9 @@ import java.util.concurrent.LinkedBlockingQueue;
 class SocketWriter extends Thread{
 
     private BufferedWriter writer = null;
-    private BlockingQueue<String> sendQueue = new LinkedBlockingQueue<>();
+    private BlockingQueue sendQueue;
 
-    void setup(Socket socket, BlockingQueue queue){
+    private void setup(Socket socket, BlockingQueue queue){
         try {
             sendQueue = queue;
             writer = new BufferedWriter(new OutputStreamWriter(socket.getOutputStream()));
@@ -25,7 +25,7 @@ class SocketWriter extends Thread{
         while(!isInterrupted()){
             if(!sendQueue.isEmpty()){
                 try {
-                    String msg = sendQueue.take();
+                    String msg = sendQueue.take().toString();
                     try {
                         writer.write(msg);
                         writer.newLine();

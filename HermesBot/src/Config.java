@@ -1,6 +1,7 @@
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.Arrays;
 import java.util.Properties;
 
 class Config {
@@ -10,6 +11,7 @@ class Config {
     private String nickname;
     private String login;
     private String password;
+    private String[] admins;
 
     private Properties prop = new Properties();
 
@@ -29,6 +31,9 @@ class Config {
             login = prop.getProperty("login");
 
             password = prop.getProperty("password");
+
+            admins = prop.getProperty("admins").split(",");
+            Arrays.sort(admins);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -57,6 +62,14 @@ class Config {
         switch (index){
             case "port" :
                 return port;
+        }
+        return null;
+    }
+
+    String[] getStringArray(String property){
+        switch (property){
+            case "admins" :
+                return admins;
         }
         return null;
     }
